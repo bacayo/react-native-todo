@@ -2,12 +2,14 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './TaskCard.Style';
 
-const TaskCard = ({task}) => {
-  return (
+const TaskCard = ({task, isCompleted}) => {
+  return isCompleted ? (
+    <View style={styles.containerIsCompleted}>
+      <Text style={styles.taskCompleted}>{task.title}</Text>
+    </View>
+  ) : (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.taskBtn}>
-        <Text style={styles.task}>{task.title}</Text>
-      </TouchableOpacity>
+      <Text style={styles.task}>{task.title}</Text>
     </View>
   );
 };

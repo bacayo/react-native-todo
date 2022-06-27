@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  TextInput,
-  Alert,
-  Keyboard,
-} from 'react-native';
+import {View, Button, TextInput, Alert, Keyboard} from 'react-native';
 import styles from './ButtonCard.Style';
 
 const ButtonCard = ({task, setTask}) => {
@@ -15,14 +7,19 @@ const ButtonCard = ({task, setTask}) => {
   const [taskValue, setTaskValue] = React.useState('');
 
   const handleSubmit = item => {
+    // check task is empty or not
     if (item === '') {
       return Alert.alert('task cannot be empty');
-    } else if (task.some(todoItem => todoItem.title) == item) {
+      // check if task is already exist
+    } else if (task.some(taskItem => taskItem.title === item)) {
       return Alert.alert('This task already exist');
+
+      // create new task with id, title
     } else {
       const newTask = {
         id: new Date().getTime().toString(),
         title: taskValue,
+        isCompleted: false,
       };
 
       setTask([...task, newTask]);
